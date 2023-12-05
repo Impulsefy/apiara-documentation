@@ -1,7 +1,8 @@
 {
   "index": "Introduction",
   "another": "Another Page",
-  "advanced": "Advanced (A Folder)",
+  "workspaces": "Workspaces",
+  "advanced": "Advanced",
   "about": {
     "title": "About",
     "type": "page"

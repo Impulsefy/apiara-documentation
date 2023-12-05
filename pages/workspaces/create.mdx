@@ -1,0 +1,78 @@
+import {Callout, Tabs} from 'nextra-theme-docs';
+
+# Endpoint de Criação de Workspace
+
+Este endpoint é responsável por criar um novo workspace associado a um parceiro autenticado.
+
+## Autenticação
+
+<Callout emoji="🚨" type="warning">
+  Este endpoint requer autenticação.
+</Callout>
+
+Para acessar este endpoint, é necessário fornecer um token de autorização no cabeçalho da requisição no formato `Bearer <token>`.
+
+Exemplo de cabeçalho:
+```http
+Authorization: Bearer [TOKEN]
+```
+
+## URL
+`POST /api/v1/workspace`
+
+## Parâmetros da Requisição
+
+```json {2, 3}
+{
+  "name": "Nome do Workspace",
+  "document": "Documento do Workspace"
+}
+```
+
+- `name` (string, obrigatório): Nome do workspace.
+- `document` (string, obrigatório): Documento do workspace.
+
+
+```js collapsed=true copy {5}
+fetch('/api/v1/workspace', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer seuTokenAqui'
+  },
+  body: JSON.stringify({
+    "name": "MeuWorkspace",
+    "document": "123456789"
+  })
+})
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Erro:', error));
+```
+
+## Exemplos de retornos
+
+<Tabs items={['200', '401']}>
+  <Tabs.Tab>
+    ```json
+    {
+      "message": "Workspace criado com sucesso!",
+      "data": {
+        "id": "ID do Workspace",
+        "name": "Nome do Workspace",
+        "document": "Documento do Workspace",
+        "photo": "Foto do Workspace",
+        "idAccount": "ID da Conta",
+        "partnerId": "ID do Parceiro"
+      }
+    }
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```json
+    {
+      "message": "Token de autorização não fornecido ou inválido."
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>

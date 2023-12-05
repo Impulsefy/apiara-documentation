@@ -2,16 +2,31 @@ import React from 'react'
 import { DocsThemeConfig } from 'nextra-theme-docs'
 
 const config: DocsThemeConfig = {
-  logo: <span>My Project</span>,
+  logo: <span>APIara</span>,
   project: {
-    link: 'https://github.com/shuding/nextra-docs-template',
+    link: 'https://github.com/Impulsefy/apiara-documentation',
   },
-  chat: {
-    link: 'https://discord.com',
+  search: {
+    placeholder: 'Pesquisar...',
   },
-  docsRepositoryBase: 'https://github.com/shuding/nextra-docs-template',
+  toc: {
+    float: true,
+    title: "Nessa página"
+  },
+  editLink: {
+    text: "Edite essa página no GitHub →"
+  },
+  feedback: {
+    content: "Dúvidas? Nos dê feedback →",
+  },
+  useNextSeoProps() {
+    return {
+      titleTemplate: "%s – Impulsefy Docs",
+    };
+  },
+  docsRepositoryBase: 'https://github.com/Impulsefy/apiara-documentation/tree/main',
   footer: {
-    text: 'Nextra Docs Template',
+    text: 'Impulsefy Docs',
   },
 }
 
