@@ -1,0 +1,73 @@
+import {Callout, Tabs} from 'nextra-theme-docs';
+
+# Endpoint PUT - Atualizar Produtos
+
+O método PUT deste endpoint permite atualizar produtos associados a um workspace de um parceiro autenticado.
+
+## Autenticação
+
+<Callout emoji="🚨" type="warning">
+  Este endpoint requer autenticação.
+</Callout>
+
+Para acessar este endpoint, é necessário fornecer um token de autorização no cabeçalho da requisição no formato `Bearer <token>`.
+
+```http
+Authorization: Bearer [TOKEN]
+```
+
+## URL
+`PUT /api/v1/workspace/:idWorkspace/products`
+
+
+
+## Exemplo de Requisição
+
+<Callout type="info">
+  Lembrando que o campo `CodigoProduto` é obrigatório, para identificar o produto que será atualizado.
+</Callout>
+
+```js copy
+fetch('/api/v1/workspace/:idWorkspace/products', {
+  method: 'PUT',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer seuTokenAqui'
+  },
+  body: JSON.stringify([
+    {
+      "CodigoProduto": "123456",
+      "NomeProduto": "Produto 1",
+      "CodigoBarra": "789012345",
+      "PrecoPromocao": "25.99",
+      "PrecoVenda": "29.99"
+    },
+    {
+      "CodigoProduto": "654321",
+      "NomeProduto": "Produto 2",
+      "CodigoBarra": "543210987",
+      "PrecoPromocao": "19.99",
+      "PrecoVenda": "22.99"
+    }
+  ])
+})
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Erro:', error));
+```
+Certifique-se de substituir `:idWorkspace` pelo ID correto do workspace.
+
+## Exemplos de retornos
+
+<Tabs items={['200', '401', '400']}>
+  <Tabs.Tab>
+    `"ok"`
+  </Tabs.Tab>
+  <Tabs.Tab>
+    `'{ "message": "Token de autorização não fornecido ou inválido." }'`
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+    `{'{ "message": "ID do workspace não foi encontrado." }'}`
+  </Tabs.Tab>
+</Tabs>

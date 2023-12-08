@@ -27,7 +27,11 @@ body {
 }
 
 .dark body {
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, #111 300px),
+  background: linear-gradient(to bottom, rgba(64, 0, 255, 0.25) 0%, #0d0a17 300px),
     fixed 0 0 / 20px 20px radial-gradient(#313131 1px, transparent 0),
     fixed 10px 10px / 20px 20px radial-gradient(#313131 1px, transparent 0);
+}
+
+:is(html[class~=dark] .dark\:nx-bg-dark) {
+  background-color: transparent;
 }

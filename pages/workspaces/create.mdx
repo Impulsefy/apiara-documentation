@@ -20,6 +20,16 @@ Authorization: Bearer [TOKEN]
 ## URL
 `POST /api/v1/workspace`
 
+### Parâmetros da URL
+- `integration` (string, opcional): Código da integração que o workspace utilizará.
+
+Ao enviar a requisição, inclua o parâmetro `integration` na URL para especificar o código da integração que deseja associar ao workspace.
+
+#### Exemplo de URL
+```http
+POST /api/v1/workspace?integration=inovafarma
+```
+
 ## Parâmetros da Requisição
 
 ```json {2, 3}
@@ -43,7 +53,7 @@ fetch('/api/v1/workspace', {
   },
   body: JSON.stringify({
     "name": "MeuWorkspace",
-    "document": "123456789"
+    "document": "1234567890"
   })
 })
   .then(response => response.json())
