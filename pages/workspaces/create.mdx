@@ -9,6 +9,13 @@ Este endpoint é responsável por criar um novo workspace associado a um parceir
 <Callout emoji="🚨" type="warning">
   Este endpoint requer autenticação.
 </Callout>
+<Callout emoji="ℹ️" type="info">
+  **Atualização da Versão:**
+  - Novos parâmetros adicionados à requisição: `phone`, `address`, `number`, `complement`, `city`, `state`, `cep` e `paymentConditions`.
+  - O endpoint agora valida e processa esses novos parâmetros para criar o workspace.
+  - Integrações específicas agora são suportadas com lógica adicional.
+</Callout>
+
 
 Para acessar este endpoint, é necessário fornecer um token de autorização no cabeçalho da requisição no formato `Bearer <token>`.
 
@@ -32,16 +39,32 @@ POST /api/v1/workspace?integration=inovafarma
 
 ## Parâmetros da Requisição
 
-```json {2, 3}
+```json {}
 {
   "name": "Nome do Workspace",
-  "document": "Documento do Workspace"
+  "document": "Documento do Workspace",
+  "phone": "Número de Telefone",
+  "address": "Endereço do Workspace",
+  "number": "Número do Endereço",
+  "complement": "Complemento do Endereço (opcional)",
+  "city": "Cidade",
+  "state": "Estado",
+  "cep": "CEP",
+  "paymentConditions": "Condições de Pagamento"
 }
 ```
 
 
 - `name` (string, obrigatório): Nome do workspace.
 - `document` (string, obrigatório): Documento do workspace.
+- `phone` (string, obrigatório): Número de telefone do workspace.
+- `address` (string, obrigatório): Endereço do workspace.
+- `number` (string, obrigatório): Número do endereço do workspace.
+- `complement` (string, opcional): Complemento do endereço do workspace.
+- `city` (string, obrigatório): Cidade do workspace.
+- `state` (string, obrigatório): Estado do workspace.
+- `cep` (string, obrigatório): CEP do workspace.
+- `paymentConditions` (string, opcional): Condições de pagamento do workspace.
 
 
 ```js collapsed=true copy {5}
@@ -53,7 +76,15 @@ fetch('/api/v1/workspace', {
   },
   body: JSON.stringify({
     "name": "MeuWorkspace",
-    "document": "1234567890"
+    "document": "1234567890",
+    "phone": "1234567890",
+    "address": "Endereço",
+    "number": "123",
+    "complement": "Complemento",
+    "city": "Cidade",
+    "state": "Estado",
+    "cep": "12345678",
+    "paymentConditions": "Condições de Pagamento"
   })
 })
   .then(response => response.json())

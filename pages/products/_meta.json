@@ -1,4 +1,4 @@
 {
   "create": "POST Many",
-  "update": "PUT Many"
+  "delete_all": "Delete Many",
 }

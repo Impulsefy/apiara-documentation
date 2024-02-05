@@ -1,8 +1,8 @@
 import {Callout, Tabs} from 'nextra-theme-docs';
 
-# Endpoint PUT - Atualizar Produtos
+# Endpoint DELETE - DELETAR TODOS os Produtos
 
-O método PUT deste endpoint permite atualizar produtos associados a um workspace de um parceiro autenticado.
+O método POST deste endpoint permite criar produtos associados a um workspace de um parceiro autenticado.
 
 ## Autenticação
 
@@ -17,39 +17,15 @@ Authorization: Bearer [TOKEN]
 ```
 
 ## URL
-`PUT /api/v1/workspace/:idWorkspace/products`
-
-
+`POST /api/v1/workspace/:idWorkspace/delete_all_products`
 
 ## Exemplo de Requisição
-
-<Callout type="info">
-  Lembrando que o campo `CodigoProduto` é obrigatório, para identificar o produto que será atualizado.
-</Callout>
-
 ```js copy
-fetch('/api/v1/workspace/:idWorkspace/products', {
-  method: 'PUT',
+fetch('/api/v1/workspace/:idWorkspace/delete_all_products', {
+  method: 'DELETE',
   headers: {
-    'Content-Type': 'application/json',
     'Authorization': 'Bearer seuTokenAqui'
-  },
-  body: JSON.stringify([
-    {
-      "CodigoProduto": "123456",
-      "NomeProduto": "Produto 1",
-      "CodigoBarra": "789012345",
-      "PrecoPromocao": "25.99",
-      "PrecoVenda": "29.99"
-    },
-    {
-      "CodigoProduto": "654321",
-      "NomeProduto": "Produto 2",
-      "CodigoBarra": "543210987",
-      "PrecoPromocao": "19.99",
-      "PrecoVenda": "22.99"
-    }
-  ])
+  }
 })
   .then(response => response.json())
   .then(data => console.log(data))

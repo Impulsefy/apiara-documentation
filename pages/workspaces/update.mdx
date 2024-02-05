@@ -1,1 +1,112 @@
-# Em breve...
+import { Callout, Tabs } from 'nextra-theme-docs';
+
+# Endpoint de Atualização de Workspace
+
+Este endpoint permite atualizar as informações de um workspace existente associado a um parceiro autenticado.
+
+## Autenticação
+
+<Callout emoji="🚨" type="warning">
+  Este endpoint requer autenticação.
+</Callout>
+
+Para acessar este endpoint, é necessário fornecer um token de autorização no cabeçalho da requisição no formato `Bearer <token>`.
+
+Exemplo de cabeçalho:
+```http
+Authorization: Bearer [TOKEN]
+```
+
+## URL
+`PUT /api/v1/workspace/:idWorkspace`
+
+
+### Parâmetros da URL
+- `idWorkspace` (string, obrigatório): ID do workspace que será atualizado.
+
+Ao enviar a requisição, inclua o parâmetro idWorkspace na URL para especificar o ID do workspace que deseja atualizar.
+
+#### Exemplo de URL
+```http
+POST /api/v1/workspace/123456
+```
+## Parâmetros da Requisição
+
+```json {}
+{
+  "name": "Nome do Workspace",
+  "document": "Documento do Workspace",
+  "phone": "Número de Telefone",
+  "address": "Endereço do Workspace",
+  "number": "Número do Endereço",
+  "complement": "Complemento do Endereço (opcional)",
+  "city": "Cidade",
+  "state": "Estado",
+  "cep": "CEP",
+  "paymentConditions": "Condições de Pagamento"
+}
+```
+
+
+- `name` (string, obrigatório): Nome do workspace.
+- `document` (string, obrigatório): Documento do workspace.
+- `phone` (string, obrigatório): Número de telefone do workspace.
+- `address` (string, obrigatório): Endereço do workspace.
+- `number` (string, obrigatório): Número do endereço do workspace.
+- `complement` (string, opcional): Complemento do endereço do workspace.
+- `city` (string, obrigatório): Cidade do workspace.
+- `state` (string, obrigatório): Estado do workspace.
+- `cep` (string, obrigatório): CEP do workspace.
+- `paymentConditions` (string, opcional): Condições de pagamento do workspace.
+
+
+```js collapsed=true copy {5}
+fetch('/api/v1/workspace/:idWorkspace', {
+  method: 'PUT',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer seuTokenAqui'
+  },
+  body: JSON.stringify({
+    "name": "NovoNomeWorkspace",
+    "document": "NovoDocumentoWorkspace",
+    "phone": "NovoTelefoneWorkspace",
+    "address": "NovoEnderecoWorkspace",
+    "number": "NovoNumeroEndereco",
+    "complement": "NovoComplementoEndereco",
+    "city": "NovaCidadeWorkspace",
+    "state": "NovoEstadoWorkspace",
+    "cep": "NovoCEPWorkspace",
+    "paymentConditions": "NovasCondicõesPagamentoWorkspace"
+  })
+})
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Erro:', error));
+```
+## Exemplos de retornos
+
+<Tabs items={['200', '401']}>
+  <Tabs.Tab>
+    ```json
+    {
+      "message": "Workspace criado com sucesso!",
+      "data": {
+      "id": "ID do Workspace",
+      "name": "Nome do Workspace",
+      "document": "Documento do Workspace",
+      "photo": "Foto do Workspace",
+      "idAccount": "ID da Conta",
+      "partnerId": "ID do Parceiro"
+    }
+    }
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```json
+    {
+      "message": "Token de autorização não fornecido ou inválido."
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>

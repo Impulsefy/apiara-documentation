@@ -9,6 +9,11 @@ O método POST deste endpoint permite criar produtos associados a um workspace d
 <Callout emoji="🚨" type="warning">
   Este endpoint requer autenticação.
 </Callout>
+<Callout emoji="ℹ️" type="info">
+  **Atualização da Versão:**
+  - Essa rota é uma combinação de atualização e inserção. Insere um novo registro se não existir, caso contrário atualiza o registro existente.
+  - Uma combinacao de idWorkspace e CodigoProduto é usada para identificar o produto.
+</Callout>
 
 Para acessar este endpoint, é necessário fornecer um token de autorização no cabeçalho da requisição no formato `Bearer <token>`.
 
@@ -17,11 +22,11 @@ Authorization: Bearer [TOKEN]
 ```
 
 ## URL
-`POST /api/v1/workspace/:idWorkspace/products`
+`POST /api/v1/workspace/:idWorkspace/many_products`
 
 ## Exemplo de Requisição
 ```js copy
-fetch('/api/v1/workspace/:idWorkspace/products', {
+fetch('/api/v1/workspace/:idWorkspace/many_products', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
